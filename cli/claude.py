@@ -17,21 +17,29 @@ Return the result in the following JSON format ONLY, without any explanations or
 {{
     "files": [
         {{
-            "name": "index.html",
+            "name": "public/index.html",
             "content": "<file_content>"
         }},
         {{
-            "name": "styles.css",
+            "name": "public/css/style.css",
             "content": "<file_content>"
         }},
         {{
-            "name": "script.js",
+            "name": "public/js/app.js",
+            "content": "<file_content>"
+        }},
+        {{
+            "name": "server.js",
+            "content": "<file_content>"
+        }},
+        {{
+            "name": "package.json",
             "content": "<file_content>"
         }}
     ]
 }}
 
-Make sure to include all the required files such as HTML, CSS, and JavaScript. Provide the complete code for each file.
+Make sure to include all the required files such as HTML, CSS, JavaScript, server.js, and package.json. Provide the complete code for each file.
 """
     return prompt
 
@@ -51,7 +59,7 @@ def parse_create_result(result):
         return file_structure
     except (json.JSONDecodeError, AttributeError):
         print("Error: Invalid JSON format")
-        return None, ""
+        return None
 
 def send_prompt(msg):
     api_key = os.getenv("CLAUDE_API_KEY")

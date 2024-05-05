@@ -4,3 +4,4 @@ add db support
 the folder should be written to the outside cli and not push on a same repo i think
 low priority: 
 auto-rerun everytime the code changes, can manually run now
+support multiple different project

@@ -1,0 +1,12 @@
+{
+  "name": "world-time-tracker",
+  "version": "1.0.0",
+  "description": "Web app to track time in different countries",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
