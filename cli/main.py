@@ -1,7 +1,6 @@
 import os
 import subprocess
 import anthropic
-from datetime import datetime
 from claude import create_prompt, parse_create_result
 from reader.read_dir import get_files_content
 
@@ -13,8 +12,25 @@ def create_project_folder(project_name):
     os.makedirs(os.path.join(project_path, "public"), exist_ok=True)
     os.makedirs(os.path.join(project_path, "public", "css"), exist_ok=True)
     os.makedirs(os.path.join(project_path, "public", "js"), exist_ok=True)
+    # Create .gitignore file in the project directory
+    create_gitignore(project_path)
     return project_path
 
+def create_gitignore(project_path):
+    gitignore_content = """
+# Node.js
+node_modules/
+npm-debug.log
+dist/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+    """
+    gitignore_path = os.path.join(project_path, '.gitignore')
+    with open(gitignore_path, 'w') as gitignore_file:
+        gitignore_file.write(gitignore_content.strip())
 def create_file(project_path, filename, content):
     file_path = os.path.join(project_path, filename)
     with open(file_path, "w") as file:
