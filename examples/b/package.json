@@ -1,0 +1,12 @@
+{
+  "name": "web-painting-app",
+  "version": "1.0.0",
+  "description": "A web app that allows users to paint on a web frame and export as a PNG",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

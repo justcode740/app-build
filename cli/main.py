@@ -67,10 +67,47 @@ def send_prompt(msg):
     )
     return message.content
 
-def handle_request(project_name, request):
+def handle_request(project_name, request, backend_needed):
     project_path = os.path.join(EXAMPLES_DIR, project_name)
     files_content = get_files_content(project_path)
-    prompt = f"""
+    if backend_needed:
+        prompt = f"""
+    The current state of the project is as follows:
+
+    {files_content}
+
+    The user has made the following request:
+
+    {request}
+
+    Put all backend api code (if applicable) to `server.js` file, use in-memory data structure to mock data store. Return the result in the following JSON format ONLY, without any explanations or additional text:
+    {{
+        "files": [
+            {{
+                "name": "public/index.html",
+                "content": "<file_content>"
+            }},
+            {{
+                "name": "public/css/style.css",
+                "content": "<file_content>"
+            }},
+            {{
+                "name": "public/js/app.js",
+                "content": "<file_content>"
+            }},
+            {{
+                "name": "server.js",
+                "content": "<file_content>"
+            }},
+            {{
+                "name": "package.json",
+                "content": "<file_content>"
+            }}
+        ]
+    }}
+    """
+    else:
+        prompt = f"""
 The current state of the project is as follows:
 
 {files_content}
@@ -117,7 +154,7 @@ Return the result in the following JSON format ONLY, without any explanations or
 
 def main():
     while True:
-        prompt = input("Enter a command (create <project_name> <project_description>, request <project_name> <request>, restart, or quit): ")
+        prompt = input("Enter a command (create <project_name> <project_description>, request <project_name> <request> <backend_needed>, restart, or quit): ")
         
         if prompt.startswith("create "):
             command_parts = prompt.split(" ", 2)
@@ -130,14 +167,15 @@ def main():
             else:
                 print("Invalid create command. Usage: create <project_name> <project_description>")
         elif prompt.startswith("request "):
-            command_parts = prompt.split(" ", 2)
-            if len(command_parts) == 3:
+            command_parts = prompt.split(" ", 3)
+            if len(command_parts) == 4:
                 project_name = command_parts[1]
                 request = command_parts[2]
-                handle_request(project_name, request)
+                backend_needed = command_parts[3].lower() == "true"
+                handle_request(project_name, request, backend_needed)
                 # start_webapp(os.path.join(EXAMPLES_DIR, project_name))
             else:
-                print("Invalid request command. Usage: request <project_name> <request>")
+                print("Invalid request command. Usage: request <project_name> <request> <backend_needed>")
         elif prompt.lower() == "restart":
             print("Restarting the CLI...")
             break

@@ -1,6 +1,7 @@
-able to add resources and use the resource on web 
-add db support 
+able to add resources and use the resource on web, may integrate with some marketplace
+add db support
+add document and actually use while generating the code
 
 low priority: 
-auto-rerun everytime the code changes, can manually run now
-support multiple different project
+embed view in vscode instead of need to open a new terminal to run the server
+

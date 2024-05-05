@@ -24,7 +24,7 @@ def get_files_content(folder_path):
 
     # Convert dictionary to JSON string
     json_content = json.dumps(file_contents)
-    print(json_content)
+    # print(json_content)
     return json_content
 
 if __name__ == "__main__":

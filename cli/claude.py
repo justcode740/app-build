@@ -44,7 +44,7 @@ Make sure to include all the required files such as HTML, CSS, JavaScript, serve
     return prompt
 
 def parse_create_result(result):
-    print(result)
+    # print(result)
     try:
         if isinstance(result, list):
             result = result[0].text  # Extract the text from the first element if result is a list
