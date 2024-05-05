@@ -148,5 +148,4 @@ def main():
             print("Invalid command. Please try again.")
 
 if __name__ == "__main__":
-    while True:
-        main()
+    main()
