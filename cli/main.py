@@ -126,7 +126,7 @@ def main():
                 project_description = command_parts[2]
                 project_path = create_project_folder(project_name)
                 initialize_webapp(project_path, project_description)
-                start_webapp(project_path)
+                # start_webapp(project_path)
             else:
                 print("Invalid create command. Usage: create <project_name> <project_description>")
         elif prompt.startswith("request "):
@@ -135,7 +135,7 @@ def main():
                 project_name = command_parts[1]
                 request = command_parts[2]
                 handle_request(project_name, request)
-                start_webapp(os.path.join(EXAMPLES_DIR, project_name))
+                # start_webapp(os.path.join(EXAMPLES_DIR, project_name))
             else:
                 print("Invalid request command. Usage: request <project_name> <request>")
         elif prompt.lower() == "restart":
